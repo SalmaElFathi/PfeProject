@@ -1,0 +1,27 @@
+body {
+  background-color: #d8c6fa; /* Set the background color */
+}
+
+.card {
+  border-radius: 20px;
+}
+
+.form-control {
+  border-radius: 50px;
+}
+
+.btn-primary {
+  border-radius: 50px;
+  background-color: #0066ff;
+  border-color: #0066ff;
+}
+
+.text-primary {
+  color: #0066ff !important;
+}
+
+.text-center img {
+  width: 100px;
+  height: 100px;
+  margin-bottom: 20px;
+}
