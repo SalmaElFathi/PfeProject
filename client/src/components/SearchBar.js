@@ -24,7 +24,7 @@ import './SearchBar.css';
         }
       });      
       if (!response.ok) {
-        throw new Error('Network response was not ok');
+        throw new Error(`Network response was not ok  Status ${response.status}`);
       }
       
       const data = await response.json();
