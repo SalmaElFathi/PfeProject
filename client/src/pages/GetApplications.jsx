@@ -1,14 +1,11 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import apiClient from '../config/apiClient';
 import toast from "react-hot-toast";
 import '../components/Dashboard.css'
 
 const GetApplications = () => {
   const token = localStorage.getItem('accessToken');
   const [applications, setApplications] = useState([]);
-
-
-
 
 const base64Url = token.split('.')[1];
 const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
@@ -23,7 +20,7 @@ const role = payload.role;
   useEffect(() => {
     try {
       if (role === "employer") {
-        axios
+        apiClient
           .get("http://localhost:8000/api/application/employer/getall", {
             withCredentials: true,
             headers: {
@@ -34,7 +31,7 @@ const role = payload.role;
             setApplications(res.data.applications);
           });
       } else if (role === "jobseeker"){
-        axios
+        apiClient
           .get("http://localhost:8000/api/application/jobseeker/getall", {
             withCredentials: true,
             headers: {
@@ -52,7 +49,7 @@ const role = payload.role;
 
   const deleteApplication = (id) => {
     try {
-      axios
+      apiClient
         .delete(`http://localhost:8000/api/application/delete/${id}`, {
           withCredentials: true,
           headers: {
@@ -73,7 +70,7 @@ const role = payload.role;
 
   const acceptApplication = (id) => {
     try {
-      axios.post(`http://localhost:8000/api/application/accept/${id}`, {}, {
+      apiClient.post(`http://localhost:8000/api/application/accept/${id}`, {}, {
         withCredentials: true,
         headers: {
           Authorization: `Bearer ${token}`,
@@ -91,7 +88,7 @@ const role = payload.role;
 
   const rejectApplication = (id) => {
     try {
-      axios.post(`http://localhost:8000/api/application/reject/${id}`, {}, {
+      apiClient.post(`http://localhost:8000/api/application/reject/${id}`, {}, {
         withCredentials: true,
         headers: {
           Authorization: `Bearer ${token}`,

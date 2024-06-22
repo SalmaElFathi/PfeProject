@@ -1,17 +1,17 @@
 import React from 'react'
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from 'axios'
+import apiClient from '../config/apiClient';
 import toast from "react-hot-toast";
 
 function ForgotPassword() {
     const [email, setEmail] = useState()
     const navigate = useNavigate()
 
-    axios.defaults.withCredentials = true;
+    apiClient.defaults.withCredentials = true;
     const handleSubmit = (e) => {
         e.preventDefault()
-        axios.post('http://localhost:8000/api/forgot-password', {email:email})
+        apiClient.post('http://localhost:8000/api/forgot-password', {email:email})
         .then(res => {
             if(res.data.Status === "Success") {
               toast.success("Password reset email sent successfully!");

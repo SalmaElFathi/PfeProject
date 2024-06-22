@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
+import apiClient from '../config/apiClient';
 import "../components/Dashboard.css";
 import RejoinLogo from "./RejoinLogo.png";
 import "./navbar.css";
@@ -44,7 +44,7 @@ const Navbar = () => {
 
   const handleLogout = async () => {
     try {
-      const response = await axios.post("http://localhost:8000/api/logout");
+      const response = await apiClient.post("http://localhost:8000/api/logout");
       if (response.status === 200) {
         localStorage.removeItem("userId");
         localStorage.removeItem("accessToken");

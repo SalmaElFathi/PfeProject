@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import apiClient from '../config/apiClient';
 import { Link } from "react-router-dom";
 
 const LatestJobs = () => {
@@ -8,7 +8,7 @@ const LatestJobs = () => {
   useEffect(() => {
     const fetchLatestJobs = async () => {
       try {
-        const response = await axios.get('http://localhost:8000/api/latest-jobs');
+        const response = await apiClient.get('http://localhost:8000/api/latest-jobs');
         setLatestJobs(response.data);
       } catch (error) {
         console.error('Error fetching latest jobs:', error);

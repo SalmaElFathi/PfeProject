@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import apiClient from '../config/apiClient'
 import './SearchBar.css';
  const Search = ({onSearch}) => {
   const [searchParams, setSearchParams] = useState({
@@ -15,7 +16,7 @@ import './SearchBar.css';
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(`/api/jobs/search?title=${searchParams.title}&salary=${searchParams.salary}&location=${searchParams.location}`);
+      const response = await apiClient.get(`/api/jobs/search?title=${searchParams.title}&salary=${searchParams.salary}&location=${searchParams.location}`);
       
       if (!response.ok) {
         throw new Error('Network response was not ok');
