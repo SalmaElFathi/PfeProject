@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import RejoinLogo from "../components/RejoinLogo.png";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../components/login.css";
+import apiClient from '../config/apiClient';
 
 function Login() {
   const navigate = useNavigate();
@@ -15,7 +16,7 @@ function Login() {
   async function submit(e) {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:8000/api/login", {
+      const response = await apiClient.post("http://localhost:8000/api/login", {
         userEmail: email,
         password: password,
       });

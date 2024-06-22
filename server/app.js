@@ -13,10 +13,12 @@ app.get('/', (req, res) => {
 });
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cors({
-  origin: 'http://localhost:3000',
-  credentials: true
-}));
+const corsOptions = {
+  origin: 'https://pfeproject-9955.onrender.com', // Le domaine de votre frontend
+  credentials: true // Si vous utilisez des cookies
+};
+
+app.use(cors(corsOptions));
 app.use(morgan('dev'));
 app.use('/api', routes);
 app.use(cookieParser());
