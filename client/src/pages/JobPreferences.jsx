@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import apiClient from '../config/apiClient';
 import toast from 'react-hot-toast';
 const industries = {
   Technology: [
@@ -51,7 +51,7 @@ function JobSeekerProfile() {
   useEffect(() => {
     const getUserIndustryAndSubIndustry = async () => {
       try {
-        const response = await axios.get('/api/getindustry',{
+        const response = await apiClient.get('/api/getindustry',{
                    headers: {
                      'Authorization': `Bearer ${token}`,
                       "Content-Type": "application/json"
@@ -78,7 +78,7 @@ function JobSeekerProfile() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      await axios.put(`http://localhost:8000/api/profile/${userId}`, {
+      await apiClient.put(`http://localhost:8000/api/profile/${userId}`, {
         industry,
         subIndustry,
       },{

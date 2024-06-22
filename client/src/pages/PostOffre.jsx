@@ -1,5 +1,5 @@
 import React, {  useState } from "react";
-import axios from "axios";
+import apiClient from '../config/apiClient';
 import toast from "react-hot-toast";
 
   const Postjob = ({ onPostSuccess }) => {
@@ -48,7 +48,7 @@ import toast from "react-hot-toast";
       }
   
       try {
-        const response = await axios.post(
+        const response = await apiClient.post(
           'http://localhost:8000/api/job/post',
           jobData,
           {

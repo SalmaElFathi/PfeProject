@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import { useDataContext } from '../contexts/index';
-import axios from "axios";
 
 function Notifications() {
 

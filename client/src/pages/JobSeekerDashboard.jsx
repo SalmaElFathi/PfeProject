@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import apiClient from '../config/apiClient';
 import NavBar from "../components/navBar.jsx";
 import "../components/Dashboard.css";
 import ProfileUpdate from "./profileUpdate.jsx";
@@ -8,7 +8,6 @@ import GetApplications from "./GetApplications.jsx";
 import { Modal, Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import JobPreferences from './JobPreferences.jsx';
-const backgroundImg = "/dashBackground.jpg";
 
 function Dashboard() {
   const userId = localStorage.getItem("userId");
@@ -21,7 +20,7 @@ function Dashboard() {
   const [activeSection, setActiveSection] = useState("profile");
   const fetchProfileInfo = async (userId) => {
     try {
-      const response = await axios.get(
+      const response = await apiClient.get(
         `http://localhost:8000/api/profile/${userId}`
       );
       const { username, Bio, profilePicture } = response.data.user;
@@ -63,7 +62,7 @@ function Dashboard() {
 
   const handleDeleteAccount = async () => {
     try {
-      const response = await axios.delete(
+      const response = await apiClient.delete(
         `http://localhost:8000/api/delete-account/${userId}`
       );
       if (response.status === 200) {

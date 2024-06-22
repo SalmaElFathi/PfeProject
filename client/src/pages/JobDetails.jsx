@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useDataContext } from '../contexts/index';
-import axios from "axios";
+import apiClient from '../config/apiClient';
 
 const JobDetails = () => {
   const { id } = useParams();
@@ -16,7 +16,7 @@ const JobDetails = () => {
   useEffect(() => {
     const fetchJobDetails = async () => {
       try {
-        const jobRes = await axios.get(`http://localhost:8000/api/job/${id}`, {
+        const jobRes = await apiClient.get(`http://localhost:8000/api/job/${id}`, {
           headers: {
             Authorization: `Bearer ${token}`
           },
@@ -30,7 +30,7 @@ const JobDetails = () => {
 
     const fetchProfileInfo = async () => {
       try {
-        const profileRes = await axios.get(`http://localhost:8000/api/profile/${userId}`, {
+        const profileRes = await apiClient.get(`http://localhost:8000/api/profile/${userId}`, {
           headers: {
             Authorization: `Bearer ${token}`
           },

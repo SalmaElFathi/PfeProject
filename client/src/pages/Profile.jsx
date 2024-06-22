@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "../components/profile.css";
-import axios from "axios";
+import apiClient from "../config/apiClient";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { subscribeToNotifications } from "../contexts/pushNotificationService";
@@ -67,7 +67,7 @@ const ProfileUpdate = () => {
 
   const fetchProfileInfo = async (userId) => {
     try {
-      const response = await axios.get(
+      const response = await apiClient.get(
         `http://localhost:8000/api/profile/${userId}`
       );
       const { username, Bio, industry, subIndustry, profilePicture, role } =
@@ -115,7 +115,7 @@ const ProfileUpdate = () => {
         formData.append("profilePicture", profilePicture);
       }
 
-      await axios.put(`http://localhost:8000/api/profile/${userId}`, formData, {
+      await apiClient.put(`http://localhost:8000/api/profile/${userId}`, formData, {
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",

@@ -1,4 +1,4 @@
-import axios from "axios";
+import apiClient from '../config/apiClient';
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
@@ -22,7 +22,7 @@ const MyJobs = () => {
   const fetchProfileInfo = async () => {
     try {
       const userId = localStorage.getItem('userId');
-      const response = await axios.get(`http://localhost:8000/api/profile/${userId}`);
+      const response = await apiClient.get(`http://localhost:8000/api/profile/${userId}`);
       setRole(response.data.user.role);
     } catch (err) {
       console.log(err);
@@ -38,7 +38,7 @@ const MyJobs = () => {
       try {
         const token = localStorage.getItem('accessToken');
         if (!token) { navigate('/'); }
-        const { data } = await axios.get(
+        const { data } = await apiClient.get(
           "http://localhost:8000/api/job/getmyjobs",
           {
             withCredentials: true,

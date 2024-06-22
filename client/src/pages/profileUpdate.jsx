@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import apiClient from "../config/apiClient";
 import { useNavigate } from 'react-router-dom';
 import '../components/profile.css';
 import toast from "react-hot-toast";
@@ -23,7 +23,7 @@ const ProfileUpdate = () => {
 
     const fetchProfileInfo = async () => {
         try {
-            const response = await axios.get(`http://localhost:8000/api/profile/${userId}`);
+            const response = await apiClient.get(`http://localhost:8000/api/profile/${userId}`);
             const {
                 username,
                 Bio,
@@ -108,7 +108,7 @@ const ProfileUpdate = () => {
                 console.log(key, value);
             }
     
-            await axios.put(`http://localhost:8000/api/profile/${userId}`, formData, {
+            await apiClient.put(`http://localhost:8000/api/profile/${userId}`, formData, {
                 headers: {
                     'Authorization': `Bearer ${token}`,
                     "Content-Type": "multipart/form-data"
@@ -130,7 +130,7 @@ const ProfileUpdate = () => {
 
     const handleLogout = async () => {
         try {
-            const response = await axios.post('http://localhost:8000/api/logout');
+            const response = await apiClient.post('http://localhost:8000/api/logout');
             if (response.status === 200) {
                 localStorage.removeItem('userId');
                 localStorage.removeItem('accessToken');

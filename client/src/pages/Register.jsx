@@ -1,7 +1,7 @@
 
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
+import apiClient from "../config/apiClient";
 
 const Register = () => {
   const [inputs, setInputs] = useState({
@@ -30,7 +30,7 @@ const Register = () => {
     const { repeatPassword, ...dataToSend } = inputs;
 
     try {
-      const response = await axios.post("http://localhost:8000/api/register", dataToSend);
+      const response = await apiClient.post("http://localhost:8000/api/register", dataToSend);
       if (response && response.data) {
         setSuccessMessage(response.data.message);
         setErrorMessage("");

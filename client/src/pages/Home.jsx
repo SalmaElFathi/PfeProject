@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import NavBar from '../components/navBar';
 import PopularCategories from '../components/popularCategories'
 import '../components/Dashboard.css'
 import LatestJobs from '../components/LatestJobs';
 import Search from '../components/SearchBar';
 import {Link} from 'react-router-dom';
-//const backgroundImg = '/dashBackground.jpg';
 const backgroundImg = 'https://i.pinimg.com/originals/53/fc/34/53fc34ee19077f82db4bfa36d4ff53c3.jpg';
 
 

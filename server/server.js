@@ -35,7 +35,7 @@ io.on('connect', async (socket) => {
         const oneToOneChatListWithDetails = await GetOneToOneChatListWithDetailsFromUserId(userId);
         await socket.emit('oneToOneChatList', oneToOneChatListWithDetails);
 
-  /*      oneToOneChatListWithDetails.map(async (data, index) => {
+      oneToOneChatListWithDetails.map(async (data, index) => {
             const sockets = await io.fetchSockets();
             sockets.map(async (s, index) => {
                 const socket_id = await GetUserIdFromSocket(s);
@@ -44,7 +44,7 @@ io.on('connect', async (socket) => {
                     await socket.emit('onlineUser', data.user._id);
                 }
             });
-        });*/
+        });
 
 
         try {
