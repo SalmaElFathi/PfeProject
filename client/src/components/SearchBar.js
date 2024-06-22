@@ -16,8 +16,13 @@ import './SearchBar.css';
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await apiClient.get(`/api/jobs/search?title=${searchParams.title}&salary=${searchParams.salary}&location=${searchParams.location}`);
-      
+      const response = await apiClient.get('/api/jobs/search', {
+        params: {
+          title: searchParams.title,
+          salary: searchParams.salary,
+          location: searchParams.location
+        }
+      });      
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
