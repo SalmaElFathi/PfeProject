@@ -8,7 +8,9 @@ const cookieParser = require('cookie-parser');
 const webpush = require("web-push");
 
 require('dotenv').config();
-
+app.get('/', (req, res) => {
+  res.send('Hello World');
+});
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors({
