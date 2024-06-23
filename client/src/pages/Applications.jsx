@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate, useParams } from "react-router-dom";
-import axios from 'axios';
+import apiClient from '../config/apiClient';
 import toast from "react-hot-toast";
 import '../components/Dashboard.css'
 
@@ -33,7 +33,7 @@ function Applications(){
 
     try {
       const token=localStorage.getItem('accessToken');
-      const { data } = await axios.post(
+      const { data } = await apiClient.post(
         "http://localhost:8000/api/application/post",
         formData,
         {

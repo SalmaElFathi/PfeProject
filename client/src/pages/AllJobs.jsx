@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import apiClient from '../config/apiClient';
 import { Link } from "react-router-dom";
-
+import "../styles/alljobs.css";
 
     const AllJobs = () => {
       const token = localStorage.getItem('accessToken');
@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
       useEffect(() => {
         
         try {
-          axios
+          apiClient
             .get("http://localhost:8000/api/job/getall", {
               withCredentials: true,
               headers: {
@@ -27,24 +27,29 @@ import { Link } from "react-router-dom";
     
       return (
           
-            <div className="background row">
-              {jobs.jobs &&
-                jobs.jobs.map((element) => {
-                  return (
-                    <div className=" col-md-4  m-2 container rounded shadow text-center" key={element._id}>
-                      <h5>{element.title}</h5>
-                      <p>{element.subIndustry}</p>
-
-                    <Link to={`/job/${element._id}`} className="btn btnstyle1 mb-2" > Job Details</Link>
-                    </div>
-                  );
-                })}
-           
-           </div>
+         <section className="allJobs">
+      <div className="container">
+        <h1 className="allJobs-title ">ALL AVAILABLE JOBS</h1>
+        <div className="allJobs-list">
+          {jobs.jobs &&
+            jobs.jobs.map((job) => (
+              <div className="allJobs-card" key={job._id}>
+                <h5 className="allJobs-card-title">{job.title}</h5>
+                <p className="allJobs-card-subIndustry">{job.subIndustry}</p>
+                <Link
+                  to={`/job/${job._id}`}
+                  className="allJobs-card-detailsLink"
+                >
+                  Job Details
+                </Link>
+              </div>
+            ))}
+        </div>
+      </div>
+    </section>
       );
     };
     
 
 export default AllJobs;
-
 

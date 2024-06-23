@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import apiClient from '../config/apiClient';
+import axios from "axios";
 import "../components/Dashboard.css";
 import RejoinLogo from "./RejoinLogo.png";
 import "./navbar.css";
@@ -44,7 +44,7 @@ const Navbar = () => {
 
   const handleLogout = async () => {
     try {
-      const response = await apiClient.post("http://localhost:8000/api/logout");
+      const response = await axios.post("http://localhost:8000/api/logout");
       if (response.status === 200) {
         localStorage.removeItem("userId");
         localStorage.removeItem("accessToken");
@@ -60,119 +60,115 @@ const Navbar = () => {
 
   return (
     <div>
-      <div className="container-fluid" style={{ padding: 0 }}>
-        <nav className="navbar navbar-expand-lg navbar-light bg-light fixed-top">
-          <div className="container-fluid">
-            <img src={RejoinLogo} alt="ReJoin Logo" className="navbar-logo" />
-            <button
-              className="navbar-toggler"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#navbarNav"
-              aria-controls="navbarNav"
-              aria-expanded="false"
-              aria-label="Toggle navigation"
-            >
-              <span className="navbar-toggler-icon"></span>
-            </button>
-            <div
-              className="collapse navbar-collapse justify-content-center"
-              id="navbarNav"
-            >
-              <ul className="navbar-nav">
-                <li className="nav-item">
-                  <strong>
-                    <Link
-                      to="/"
-                      className="nav-link "
-                      style={{ color: "rgb(39, 30, 163)" }}
-                    >
-                      Home
-                    </Link>
-                  </strong>
-                </li>
-
-                {isAuthenticated && (
-                  <>
-                    {role === "jobseeker" ? (
-                      <>
-                        <li className="nav-item">
-                          <strong>
-                            <Link
-                              to="/dashboard"
-                              className="nav-link "
-                              style={{ color: "rgb(39, 30, 163)" }}
-                            >
-                              My Dashboard
-                            </Link>
-                          </strong>
-                        </li>
-                        <li className="nav-item">
-                          <strong>
-                            <Link
-                              to="/job-notifications"
-                              className="nav-link "
-                              style={{ color: "rgb(39, 30, 163)" }}
-                            >
-                              Job Notifications
-                            </Link>
-                          </strong>
-                        </li>
-                        <li className="nav-item">
-                          <strong>
-                            <Link
-                              to="/chat"
-                              className="nav-link "
-                              style={{ color: "rgb(39, 30, 163)" }}
-                            >
-                              Chat
-                            </Link>
-                          </strong>
-                        </li>
-                      </>
-                    ) : (
-                      <>
-                        <li className="nav-item">
-                          <strong>
-                            <Link
-                              to="/dashboard"
-                              className="nav-link"
-                              style={{ color: "rgb(39, 30, 163)" }}
-                            >
-                              My Dashboard
-                            </Link>
-                          </strong>
-                        </li>
-                        <li className="nav-item">
-                          <strong>
-                            <Link
-                              to="/chat"
-                              className="nav-link "
-                              style={{ color: "rgb(39, 30, 163)" }}
-                            >
-                              Chat
-                            </Link>
-                          </strong>
-                        </li>
-                      </>
-                    )}
-                  </>
-                )}
-
-                <li className="nav-item">
-                  <strong>
-                    <Link
-                      to="/contact"
-                      className="nav-link "
-                      style={{ color: "rgb(39, 30, 163)" }}
-                    >
-                      Contact Us
-                    </Link>
-                  </strong>
-                </li>
-              </ul>
-            </div>
-            <div className="d-flex" style={{ width: "280px" }}>
+    <div className="container-fluid" style={{ padding: 0 }}>
+      <nav className="navbar navbar-expand-lg bg-light navbar-light fixed-top responsive-navbar">
+        <div className="container-fluid">
+          <img src={RejoinLogo} alt="ReJoin Logo" className="navbar-logo" />
+          <button
+            className="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span className="navbar-toggler-icon"></span>
+          </button>
+          <div className="collapse navbar-collapse " id="navbarNav">
+            <ul className="navbar-nav justify-content-center  w-100">
+              <li className="nav-item">
+                <strong>
+                  <Link
+                    to="/"
+                    className="nav-link"
+                    style={{ color: "rgb(39, 30, 163)" }}
+                  >
+                    Home
+                  </Link>
+                </strong>
+              </li>
+  
+              {isAuthenticated && (
+                <>
+                  {role === "jobseeker" ? (
+                    <>
+                      <li className="nav-item">
+                        <strong>
+                          <Link
+                            to="/dashboard"
+                            className="nav-link"
+                            style={{ color: "rgb(39, 30, 163)" }}
+                          >
+                            My Dashboard
+                          </Link>
+                        </strong>
+                      </li>
+                      <li className="nav-item">
+                        <strong>
+                          <Link
+                            to="/job-notifications"
+                            className="nav-link"
+                            style={{ color: "rgb(39, 30, 163)" }}
+                          >
+                            Job Notifications
+                          </Link>
+                        </strong>
+                      </li>
+                      <li className="nav-item">
+                        <strong>
+                          <Link
+                            to="/chat"
+                            className="nav-link"
+                            style={{ color: "rgb(39, 30, 163)" }}
+                          >
+                            Chat
+                          </Link>
+                        </strong>
+                      </li>
+                    </>
+                  ) : (
+                    <>
+                      <li className="nav-item">
+                        <strong>
+                          <Link
+                            to="/dashboard"
+                            className="nav-link"
+                            style={{ color: "rgb(39, 30, 163)" }}
+                          >
+                            My Dashboard
+                          </Link>
+                        </strong>
+                      </li>
+                      <li className="nav-item">
+                        <strong>
+                          <Link
+                            to="/chat"
+                            className="nav-link"
+                            style={{ color: "rgb(39, 30, 163)" }}
+                          >
+                            Chat
+                          </Link>
+                        </strong>
+                      </li>
+                    </>
+                  )}
+                </>
+              )}
+              
+              <li className="nav-item">
+                <strong>
+                  <Link
+                    to="/contact"
+                    className="nav-link"
+                    style={{ color: "rgb(39, 30, 163)" }}
+                  >
+                    Contact Us
+                  </Link>
+                </strong>
+              </li>
+            </ul>
+            <div className="d-flex auth-buttons "style={{width:'420px'}} >
               {isAuthenticated ? (
                 <>
                   {role === "jobseeker" ? (
@@ -215,10 +211,10 @@ const Navbar = () => {
               )}
             </div>
           </div>
-        </nav>
-      </div>
+        </div>
+      </nav>
     </div>
-  );
-};
-
+  </div>
+  
+        )  }
 export default Navbar;
